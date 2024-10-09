@@ -141,8 +141,18 @@ console.log(countCourses(students[1]));
   **********/
 function listAllCourses(students) {
   // Your code here
+  return students
+    .map((student) => student.courses)
+    .reduce((acc, courses) => {
+      courses.forEach((course) => {
+        if (!acc.includes(course)) {
+          acc.push(course);
+        }
+      });
+      return acc;
+    }, []);
 }
-// console.log(listAllCourses(students));
+console.log(listAllCourses(students));
 
 /**********
   Question 6:
@@ -158,8 +168,11 @@ function listAllCourses(students) {
 
 function removeCourseFromStudent(student, course) {
   // Your code here
+  const removeCourse = student.courses.indexOf(course);
+  student.courses.splice(removeCourse, 1);
+  return student;
 }
-// console.log(removeCourseFromStudent(students[6],"Science"));
+console.log(removeCourseFromStudent(students[6], "Science"));
 
 /**********
   Question 7:
@@ -173,9 +186,11 @@ function removeCourseFromStudent(student, course) {
 
 function findStudentById(studentId, students) {
   // Your code here
+  const result = students.filter((student) => student.id === studentId);
+  return result;
 }
 
-// console.log(findStudentById(10,students));
+console.log(findStudentById(10, students));
 
 /**********
   Question 8: 🌶️🌶️🌶️
@@ -203,6 +218,10 @@ function findStudentById(studentId, students) {
 
 function getStudentsByCourse(course, students) {
   // Your code here
+  const studentsByCourse = students.filter((student) => {
+    return student.courses.includes(course);
+  });
+  return studentsByCourse;
 }
 
-// console.log(getStudentsByCourse("Music",students));
+console.log(getStudentsByCourse("Music", students));
